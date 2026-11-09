@@ -13,6 +13,8 @@ Se monitorean tres variables, que son temperatura, humedad y estado de la puerta
 
 ![Diagrama de arquitectura](docs/arquitectura.png)
 
+![Diagrama de flujo de datos](docs/flujo_datos.png)
+
 ## Arquitectura
 
 | Componente | Dónde corre | Función |
