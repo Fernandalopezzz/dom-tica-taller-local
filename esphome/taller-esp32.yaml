@@ -1,0 +1,69 @@
+esphome:
+  name: taller-esp32
+  friendly_name: Taller ESP32
+ 
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+ 
+logger:
+ 
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  ap:
+    ssid: "Taller-ESP32-AP"
+    password: !secret ap_password
+  reboot_timeout: 5min
+ 
+mqtt:
+  broker: !secret mqtt_broker
+  username: !secret mqtt_user
+  password: !secret mqtt_password
+  discovery: false
+  birth_message:
+    topic: taller/estado
+    payload: online
+  will_message:
+    topic: taller/estado
+    payload: offline
+ 
+ota:
+  - platform: esphome
+    password: !secret ota_password
+ 
+sensor:
+  - platform: dht
+    pin: GPIO4
+    model: DHT22
+    update_interval: 60s
+    temperature:
+      name: "Temperatura"
+      state_topic: taller/sensor/temp
+    humidity:
+      name: "Humedad"
+      state_topic: taller/sensor/humedad
+ 
+binary_sensor:
+  - platform: gpio
+    name: "Puerta"
+    device_class: door
+    pin:
+      number: GPIO5
+      mode: INPUT_PULLUP
+    state_topic: taller/puerta/estado
+    filters:
+      - delayed_on_off: 50ms
+ 
+switch:
+  - platform: gpio
+    name: "Ventilador"
+    pin: GPIO26
+    command_topic: taller/ventilador/control
+    state_topic: taller/ventilador/estado
+  - platform: gpio
+    name: "Luz"
+    pin: GPIO27
+    command_topic: taller/luz/control
+    state_topic: taller/luz/estado

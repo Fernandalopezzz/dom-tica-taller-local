@@ -1,0 +1,1 @@
+Colocar aca la imagen de fondo (fondo.jpg). Esta es la unica carpeta que publica /static.

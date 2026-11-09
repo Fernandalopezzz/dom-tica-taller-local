@@ -1,0 +1,10 @@
+# Secretos
+.env
+secrets.yaml
+*.token
+# Entornos y compilados
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.bin

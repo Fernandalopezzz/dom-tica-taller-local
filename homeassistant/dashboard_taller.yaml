@@ -1,0 +1,71 @@
+title: Taller de Trabajo
+views:
+  - title: Estado
+    path: estado
+    icon: mdi:warehouse
+    cards:
+      - type: conditional
+        conditions:
+          - entity: sensor.taller_temperatura
+            state_not: unavailable
+          - entity: switch.taller_ventilador
+            state: 'on'
+        card:
+          type: markdown
+          content: >
+            ⚠️ **ALERTA:** El ventilador se ha activado automáticamente por
+            temperatura alta.
+      - type: markdown
+        content: |
+          # ¡HOLA, FERNANDA!
+          Bienvenida al panel de control de tu Taller.
+      - type: entities
+        title: Estado y Controles
+        entities:
+          - entity: binary_sensor.taller_puerta
+            name: Estado de la Puerta
+          - entity: switch.taller_ventilador
+            name: Ventilador
+          - entity: switch.taller_luz
+            name: Luz Auxiliar
+          - entity: input_number.luz_taller
+            name: Nivel de Luz (lx)
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: gauge
+            entity: sensor.taller_temperatura
+            name: Temperatura
+            min: 0
+            max: 50
+            severity:
+              green: 0
+              yellow: 28
+              red: 35
+            needle: true
+          - type: gauge
+            entity: sensor.taller_humedad
+            name: Humedad
+            min: 0
+            max: 100
+            severity:
+              green: 0
+              yellow: 65
+              red: 80
+            needle: true
+      - type: history-graph
+        title: Historial de las últimas 6 horas
+        hours_to_show: 6
+        entities:
+          - sensor.taller_temperatura
+          - sensor.taller_humedad
+          - binary_sensor.taller_puerta
+      - type: history-graph
+        entities:
+          - entity: sensor.system_monitor_uso_del_procesador
+          - entity: sensor.system_monitor_uso_del_disco_de
+          - entity: sensor.system_monitor_uso_de_memoria
+          - entity: sensor.system_monitor_carga_1_min
+        title: Recursos del Sistema (Home Assistant)
+        hours_to_show: 1

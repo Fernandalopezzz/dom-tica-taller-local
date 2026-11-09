@@ -1,0 +1,39 @@
+mqtt:
+  sensor:
+    - name: "Taller Temperatura"
+      unique_id: taller_temperatura
+      state_topic: "taller/sensor/temp"
+      unit_of_measurement: "°C"
+      device_class: temperature
+      state_class: measurement
+      availability_topic: "taller/estado"
+    - name: "Taller Humedad"
+      unique_id: taller_humedad
+      state_topic: "taller/sensor/humedad"
+      unit_of_measurement: "%"
+      device_class: humidity
+      state_class: measurement
+      availability_topic: "taller/estado"
+  binary_sensor:
+    - name: "Taller Puerta"
+      unique_id: taller_puerta
+      state_topic: "taller/puerta/estado"
+      payload_on: "ON"
+      payload_off: "OFF"
+      device_class: door
+      availability_topic: "taller/estado"
+  switch:
+    - name: "Taller Ventilador"
+      unique_id: taller_ventilador
+      command_topic: "taller/ventilador/control"
+      state_topic: "taller/ventilador/estado"
+      payload_on: "ON"
+      payload_off: "OFF"
+      availability_topic: "taller/estado"
+    - name: "Taller Luz"
+      unique_id: taller_luz
+      command_topic: "taller/luz/control"
+      state_topic: "taller/luz/estado"
+      payload_on: "ON"
+      payload_off: "OFF"
+      availability_topic: "taller/estado"
